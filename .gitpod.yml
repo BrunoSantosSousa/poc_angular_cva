@@ -2,6 +2,8 @@
 tasks:
   - init: echo 'Instalando angular' # runs during prebuild
     command: npm install -g @angular/cli
+  - name: Serve application
+    command: ng serve
 
 ports:
   - port: 4200
