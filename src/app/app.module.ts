@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -7,10 +8,11 @@ import { TimepickerComponent } from './timepicker/timepicker.component';
 @NgModule({
   declarations: [
     AppComponent,
-    TimepickerComponent
+    TimepickerComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
