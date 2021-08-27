@@ -1,5 +1,5 @@
 <div [formGroup]="formGroup">
-  <input type="text" formControlName="hora" />
+  <input type="text" mask="Hh" formControlName="hora" />
   <span>:</span>
-  <input type="text" formControlName="minuto"/>
+  <input type="text" mask="m0" formControlName="minuto" />
 </div>
