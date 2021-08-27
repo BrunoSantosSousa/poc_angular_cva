@@ -1,11 +1,12 @@
 <h1>Hello World</h1>
 
-<form [formGroup]="group">
+<form>
   <div>
     <label for="">Data de início do evento:</label>
-    <app-timepicker formControlName="dataInicio"></app-timepicker>
+    <app-timepicker [formControl]="formControlData"></app-timepicker>
 
     <p>valor: {{ formControlData.value }}</p>
     <p>touched: {{ formControlData.touched }}</p>
+    <p>valid: {{ formControlData.valid }}</p>
   </div>
 </form>
