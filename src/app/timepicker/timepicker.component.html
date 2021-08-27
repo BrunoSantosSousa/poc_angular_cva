@@ -1,5 +1,5 @@
 <div [formGroup]="formGroup">
-  <input type="text" mask="Hh" formControlName="hora" />
+  <input type="text" mask="Hh" formControlName="hora" (blur)="handleBlur()" />
   <span>:</span>
-  <input type="text" mask="m0" formControlName="minuto" />
+  <input type="text" mask="m0" formControlName="minuto" (blur)="handleBlur()" />
 </div>

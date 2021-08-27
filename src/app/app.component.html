@@ -3,8 +3,9 @@
 <form [formGroup]="group">
   <div>
     <label for="">Data de início do evento:</label>
-    <app-timepicker formControlName="dataInicio" ></app-timepicker>
+    <app-timepicker formControlName="dataInicio"></app-timepicker>
 
     <p>valor: {{ formControlData.value }}</p>
+    <p>touched: {{ formControlData.touched }}</p>
   </div>
 </form>

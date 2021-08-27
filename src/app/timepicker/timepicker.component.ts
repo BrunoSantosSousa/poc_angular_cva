@@ -20,8 +20,10 @@ import {
   ],
 })
 export class TimepickerComponent implements OnInit, ControlValueAccessor {
-  value!: string;
   onChange!: (value: string) => void;
+
+  onTouch!: (value: boolean) => void;
+
   formGroup!: FormGroup;
 
   horaControl!: FormControl;
@@ -54,6 +56,10 @@ export class TimepickerComponent implements OnInit, ControlValueAccessor {
   }
 
   registerOnTouched(fn: any): void {
-    throw new Error('Method not implemented.');
+    this.onTouch = fn;
+  }
+
+  handleBlur() {
+    this.onTouch(true);
   }
 }
