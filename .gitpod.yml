@@ -1,7 +1,7 @@
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - init: echo 'Instalando angular' # runs during prebuild
-    command: npm install -g @angular/cli
+    command: npm install -g @angular/cli -y
   - name: Serve application
     command: ng serve
 
