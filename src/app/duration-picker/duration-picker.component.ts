@@ -54,9 +54,7 @@ export class DurationPickerComponent implements ControlValueAccessor {
 
   writeValue(valor: string): void {
     const novoValor = this.aplicaMascara(valor);
-    console.log('novoValor', novoValor);
     this.valor = novoValor;
-    console.log('chamando writeValue');
   }
 
   registerOnChange(fn: any): void {
@@ -68,9 +66,6 @@ export class DurationPickerComponent implements ControlValueAccessor {
   }
 
   onKeyup($event: KeyboardEvent) {
-    console.log($event);
-    console.log(this.inputRef.nativeElement.value);
-
     this.atualizaValorInput(
       this.aplicaMascara(this.inputRef.nativeElement.value)
     );
