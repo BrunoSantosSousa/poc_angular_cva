@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxMaskModule } from 'ngx-mask';
 
@@ -15,6 +15,7 @@ import { DurationPickerComponent } from './duration-picker/duration-picker.compo
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
   ],

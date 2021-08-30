@@ -1,7 +1,14 @@
 <input
+  [(ngModel)]="valor"
   #inputRef
   type="text"
   maxlength="6"
   (keyup)="onKeyup($event)"
-  (blur)="handleBlur()"
+  (blur)="onBlur()"
 />
+
+<div>
+  <h3>Duration Picker</h3>
+  <p>Valor: {{ inputRef.value }}</p>
+  <p>Valor controle: {{ control.value }}</p>
+</div>

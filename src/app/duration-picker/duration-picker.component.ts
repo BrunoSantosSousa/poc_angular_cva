@@ -1,4 +1,17 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  forwardRef,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
 
 interface LocalTempo {
   hora: string;
@@ -9,19 +22,50 @@ interface LocalTempo {
   selector: 'app-duration-picker',
   templateUrl: './duration-picker.component.html',
   styleUrls: ['./duration-picker.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DurationPickerComponent),
+      multi: true,
+    },
+  ],
 })
-export class DurationPickerComponent implements OnInit {
+export class DurationPickerComponent implements ControlValueAccessor {
   @ViewChild('inputRef') inputRef!: ElementRef<HTMLInputElement>;
+
+  @Input('formControl') control!: FormControl;
+
+  onChange!: (value: string) => void;
+  onTouch!: (value: boolean) => void;
+
+  temporario?: string;
+
+  private _valor!: string;
+
+  get valor(): string {
+    return this._valor;
+  }
+
+  set valor(novoValor) {
+    this._valor = novoValor;
+  }
 
   constructor() {}
 
-  duracaoEvento!: string;
-
-  get valor(): string {
-    return this.inputRef.nativeElement.value;
+  writeValue(valor: string): void {
+    const novoValor = this.aplicaMascara(valor);
+    console.log('novoValor', novoValor);
+    this.valor = novoValor;
+    console.log('chamando writeValue');
   }
 
-  ngOnInit(): void {}
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouch = fn;
+  }
 
   onKeyup($event: KeyboardEvent) {
     console.log($event);
@@ -43,10 +87,17 @@ export class DurationPickerComponent implements OnInit {
   }
 
   atualizaValorInput(value: string) {
-    this.inputRef.nativeElement.value = value;
+    this.valor = value;
+    this.onChange(this.sanitizarSaida(this.valor));
   }
 
-  handleBlur() {
+  sanitizarSaida(valor: string): string {
+    return valor.replace(/\D/g, '');
+  }
+
+  onBlur() {
+    this.onTouch(true);
+
     if (!this.valor?.length) {
       return;
     }
@@ -77,7 +128,7 @@ export class DurationPickerComponent implements OnInit {
   }
 
   normalizaHora(hora: string): string {
-    if (hora.length !== 2 && +hora <= 9) {
+    if (hora.length === 1 && +hora <= 9) {
       return `0${hora}`;
     }
     return `${hora}`;

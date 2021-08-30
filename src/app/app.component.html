@@ -9,14 +9,14 @@
   -->
   <div style="margin-top: 20px">
     <label for="">Duração do evento:</label>
-    <app-duration-picker></app-duration-picker>
+    <app-duration-picker [formControl]="duracaoControl"></app-duration-picker>
   </div>
 </form>
-<!--
+
 <h2>Form Group</h2>
 <p>Valido: {{ group.valid }}</p>
 
 <h2>Duração Form Control</h2>
 <p>Valor: {{ duracaoControl.value }}</p>
 <p>Valido: {{ duracaoControl.valid }}</p>
--->
+<p>Tocado: {{ duracaoControl.touched }}</p>
