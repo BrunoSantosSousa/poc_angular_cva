@@ -1,1 +1,7 @@
-<p>duration-picker works!</p>
+<input
+  #inputRef
+  type="text"
+  maxlength="6"
+  (keyup)="onKeyup($event)"
+  (blur)="handleBlur()"
+/>

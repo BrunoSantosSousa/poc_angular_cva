@@ -1,12 +1,22 @@
-<h1>Hello World</h1>
+<h1>POC - Campo Hora / Duração</h1>
 
 <form>
+  <!--
   <div>
     <label for="">Data de início do evento:</label>
-    <app-timepicker [formControl]="formControlData"></app-timepicker>
-
-    <p>valor: {{ formControlData.value }}</p>
-    <p>touched: {{ formControlData.touched }}</p>
-    <p>valid: {{ formControlData.valid }}</p>
+    <app-timepicker [formControl]="horaControl"></app-timepicker>
+  </div>
+  -->
+  <div style="margin-top: 20px">
+    <label for="">Duração do evento:</label>
+    <app-duration-picker></app-duration-picker>
   </div>
 </form>
+<!--
+<h2>Form Group</h2>
+<p>Valido: {{ group.valid }}</p>
+
+<h2>Duração Form Control</h2>
+<p>Valor: {{ duracaoControl.value }}</p>
+<p>Valido: {{ duracaoControl.valid }}</p>
+-->

@@ -16,13 +16,18 @@ export class AppComponent {
 
   constructor(private fb: FormBuilder) {
     this.group = this.fb.group({
-      dataInicio: ['aabb'],
+      hora: ['1240', Validators.required],
+      duracao: ['00000', Validators.required]
     });
 
     //this.group.markAllAsTouched();
   }
 
-  get formControlData(): FormControl {
+  get horaControl(): FormControl {
     return this.group.get('dataInicio') as FormControl;
+  }
+
+  get duracaoControl(): FormControl {
+    return this.group.get('duracao') as FormControl;
   }
 }
