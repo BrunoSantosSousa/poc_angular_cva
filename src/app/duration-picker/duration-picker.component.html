@@ -1,5 +1,6 @@
 <input
   [(ngModel)]="valor"
+  [ngClass]="{ invalid: control.touched && control.invalid, valid: control.touched && control.valid }"
   #inputRef
   type="text"
   maxlength="6"

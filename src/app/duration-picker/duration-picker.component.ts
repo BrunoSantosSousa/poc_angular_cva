@@ -8,9 +8,13 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
+  AbstractControl,
   ControlValueAccessor,
   FormControl,
   NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator,
+  Validators,
 } from '@angular/forms';
 
 interface LocalTempo {
@@ -30,7 +34,7 @@ interface LocalTempo {
     },
   ],
 })
-export class DurationPickerComponent implements ControlValueAccessor {
+export class DurationPickerComponent implements ControlValueAccessor, Validator {
   @ViewChild('inputRef') inputRef!: ElementRef<HTMLInputElement>;
 
   @Input('formControl') control!: FormControl;
@@ -51,6 +55,25 @@ export class DurationPickerComponent implements ControlValueAccessor {
   }
 
   constructor() {}
+
+  validate(control: AbstractControl): ValidationErrors | null {
+    if(control.hasValidator(Validators.required)) {
+      return this.validarRequired(control.value) ? null : { nonDuration: true };
+    }
+
+    return this.validarNaoRequired(control.value) ? null : { nonDuration: true };
+  }
+
+  validarRequired(valor: string): boolean {
+    return [5, 6].includes(valor.length);
+  }
+
+  validarNaoRequired(valor: string) : boolean {
+    if(valor === null || valor === '') {
+      return true;
+    }
+    return this.validarRequired(valor);
+  }
 
   writeValue(valor: string): void {
     const novoValor = this.aplicaMascara(valor);
