@@ -11,6 +11,7 @@ import {
   AbstractControl,
   ControlValueAccessor,
   FormControl,
+  NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
   Validator,
@@ -32,9 +33,16 @@ interface LocalTempo {
       useExisting: forwardRef(() => DurationPickerComponent),
       multi: true,
     },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => DurationPickerComponent),
+      multi: true,
+    },
   ],
 })
-export class DurationPickerComponent implements ControlValueAccessor, Validator {
+export class DurationPickerComponent
+  implements ControlValueAccessor, Validator
+{
   @ViewChild('inputRef') inputRef!: ElementRef<HTMLInputElement>;
 
   @Input('formControl') control!: FormControl;
@@ -57,19 +65,21 @@ export class DurationPickerComponent implements ControlValueAccessor, Validator 
   constructor() {}
 
   validate(control: AbstractControl): ValidationErrors | null {
-    if(control.hasValidator(Validators.required)) {
+    if (control.hasValidator(Validators.required)) {
       return this.validarRequired(control.value) ? null : { nonDuration: true };
     }
 
-    return this.validarNaoRequired(control.value) ? null : { nonDuration: true };
+    return this.validarNaoRequired(control.value)
+      ? null
+      : { nonDuration: true };
   }
 
   validarRequired(valor: string): boolean {
-    return [5, 6].includes(valor.length);
+    return [4, 5].includes(valor.length);
   }
 
-  validarNaoRequired(valor: string) : boolean {
-    if(valor === null || valor === '') {
+  validarNaoRequired(valor: string): boolean {
+    if (valor === null || valor === '') {
       return true;
     }
     return this.validarRequired(valor);
