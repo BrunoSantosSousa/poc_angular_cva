@@ -68,12 +68,28 @@ export class TimepickerComponent
     }
   }
 
+  validaEntradaTempo(tempo: string) {
+    if (+tempo === +tempo) {
+      return tempo;
+    }
+
+    return null;
+  }
+
   writeValue(obj: string): void {
     if (obj.length !== 4) {
       return;
     }
-    this.horaControl.setValue(+obj.substr(0, 2) || null);
-    this.minutoControl.setValue(+obj.substr(2, 3) || null);
+
+    const tempo = this.validaEntradaTempo(obj);
+    if (tempo) {
+      this.horaControl.setValue(tempo.substr(0, 2));
+      this.minutoControl.setValue(tempo.substr(2, 3));
+      return;
+    }
+
+    this.horaControl.setValue(null);
+    this.minutoControl.setValue(null);
   }
 
   registerOnChange(onChange: any): void {
@@ -119,14 +135,14 @@ export class TimepickerComponent
     const minutos = this.normalizarMinuto(this.minutoControl.value);
 
     this.horaControl.setValue(hora);
-    if(minutos && !hora) {
+    if (minutos && !hora) {
       this.horaControl.setErrors({ nonTime: true });
-    } 
+    }
 
     this.minutoControl.setValue(minutos);
-    if(hora && !minutos) {
+    if (hora && !minutos) {
       this.minutoControl.setErrors({ nonTime: true });
-    } 
+    }
 
     this.onTouch(true);
   }
