@@ -5,11 +5,13 @@ import { NgxMaskModule } from 'ngx-mask';
 
 import { AppComponent } from './app.component';
 import { TimepickerComponent } from './timepicker/timepicker.component';
+import { DurationPickerComponent } from './duration-picker/duration-picker.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TimepickerComponent,
+    DurationPickerComponent,
   ],
   imports: [
     BrowserModule,
